@@ -48,13 +48,11 @@ jobs:
         with:
           channel: 'stable'
 
-      - name: Initialize Flutter platforms if missing
+      - name: Generate Android and Linux platform files
         run: |
-          if [ ! -f "pubspec.yaml" ]; then
-            flutter create --org io.github.hiteshharidevan_nocode5 --project-name stylevault .
-          else
-            flutter create --platforms=android,linux .
-          fi
+          flutter create --org io.github.hiteshharidevan_nocode5 --project-name stylevault --platforms=android,linux .
+          sed -i 's/<application/<uses-permission android:name="android.permission.INTERNET"\/>\n    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"\/>\n    <application/' android/app/src/main/AndroidManifest.xml
+          sed -i 's/android:label="stylevault"/android:label="StyleVault"/' android/app/src/main/AndroidManifest.xml
           flutter pub get
 
       - name: Build Android APK
