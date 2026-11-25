@@ -30,7 +30,7 @@ jobs:
             TAG="${GITHUB_REF#refs/tags/}"
           fi
           echo "TAG=$TAG" >> $GITHUB_OUTPUT
-          echo "APP_NAME=StyleVault-${TAG}" >> $GITHUB_OUTPUT
+          echo "APP_NAME=StyleT-${TAG}" >> $GITHUB_OUTPUT
 
       - name: Install Linux desktop build dependencies
         run: |
@@ -52,7 +52,7 @@ jobs:
         run: |
           flutter create --org io.github.hiteshharidevan_nocode5 --project-name stylevault --platforms=android,linux .
           sed -i 's/<application/<uses-permission android:name="android.permission.INTERNET"\/>\n    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"\/>\n    <application/' android/app/src/main/AndroidManifest.xml
-          sed -i 's/android:label="stylevault"/android:label="StyleVault"/' android/app/src/main/AndroidManifest.xml
+          sed -i 's/android:label="stylevault"/android:label="StyleT"/' android/app/src/main/AndroidManifest.xml
           if [ -f "android/app/build.gradle.kts" ]; then
             sed -i 's/minSdk = flutter.minSdkVersion/minSdk = 21/' android/app/build.gradle.kts
           elif [ -f "android/app/build.gradle" ]; then
@@ -81,7 +81,7 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.tag_step.outputs.TAG }}
-          name: StyleVault ${{ steps.tag_step.outputs.TAG }}
+          name: StyleT ${{ steps.tag_step.outputs.TAG }}
           body: |
             Privacy-first on-device personal stylist.
             - Android / Chromebook APK: `${{ steps.tag_step.outputs.APP_NAME }}.apk`

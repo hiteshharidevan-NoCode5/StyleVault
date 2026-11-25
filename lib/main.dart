@@ -12,16 +12,16 @@ import 'package:open_filex/open_filex.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const StyleVaultApp());
+  runApp(const StyleTApp());
 }
 
-class StyleVaultApp extends StatelessWidget {
-  const StyleVaultApp({super.key});
+class StyleTApp extends StatelessWidget {
+  const StyleTApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'StyleVault',
+      title: 'StyleT',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
@@ -214,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _checkGitHubUpdate() async {
     try {
       final res = await http.get(
-        Uri.parse('https://api.github.com/repos/hiteshharidevan-NoCode5/StyleVault/releases/latest'),
+        Uri.parse('https://api.github.com/repos/hiteshharidevan-NoCode5/StyleT/releases/latest'),
       );
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
@@ -244,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final res = await http.get(Uri.parse(_apkDownloadUrl!));
       final dir = await getTemporaryDirectory();
-      final apkFile = File('${dir.path}/StyleVault-$_latestTag.apk');
+      final apkFile = File('${dir.path}/StyleT-$_latestTag.apk');
       await apkFile.writeAsBytes(res.bodyBytes);
       setState(() => _isDownloading = false);
       await OpenFilex.open(apkFile.path);
@@ -360,7 +360,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('StyleVault'),
+        title: const Text('StyleT'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -504,7 +504,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Text('Your Styling Focus', style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 8),
         const Text(
-          'StyleVault highlights your natural strengths and balances proportions so you look sharp and feel confident in every outfit.',
+          'StyleT highlights your natural strengths and balances proportions so you look sharp and feel confident in every outfit.',
         ),
         const SizedBox(height: 16),
         ..._goalOptions.map(

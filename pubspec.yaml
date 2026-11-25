@@ -1,7 +1,7 @@
 name: stylevault
 description: Privacy-first on-device personal stylist and wardrobe matcher.
 publish_to: 'none'
-version: 0.2.6+6
+version: 0.2.7+7
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
@@ -27,7 +27,7 @@ flutter_launcher_icons:
   android: true
   ios: false
   image_path: "assets/icon/icon.png"
-  adaptive_icon_background: "#F8FAFC"
+  adaptive_icon_background: "#101318"
   adaptive_icon_foreground: "assets/icon/icon.png"
 
 flutter:
