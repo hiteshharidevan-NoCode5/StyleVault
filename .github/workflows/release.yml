@@ -60,6 +60,7 @@ jobs:
             sed -i 's/minSdkVersion flutter.minSdkVersion/minSdkVersion 21/' android/app/build.gradle
           fi
           flutter pub get
+          dart run flutter_launcher_icons
 
       - name: Build Android APK
         run: flutter build apk --release
