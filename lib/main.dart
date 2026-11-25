@@ -45,8 +45,8 @@ class StyleVaultApp extends StatelessWidget {
 class WardrobeItem {
   final String id;
   final String imagePath;
-  final String category; // Top, Bottom, Full Outfit, Layer
-  final String silhouette; // Structured, Relaxed, Vertical/Long, Tailored
+  final String category;
+  final String silhouette;
   final int r;
   final int g;
   final int b;
@@ -100,7 +100,6 @@ class ColorAnalyzer {
     final resized = img.copyResize(decoded, width: 64);
     int rSum = 0, gSum = 0, bSum = 0, count = 0;
 
-    // Sample central 50% of image to focus on the garment rather than background
     final startX = (resized.width * 0.25).round();
     final endX = (resized.width * 0.75).round();
     final startY = (resized.height * 0.25).round();
@@ -145,14 +144,13 @@ class ColorAnalyzer {
   }
 
   static double colorHarmonyScore(WardrobeItem a, int r2, int g2, int b2) {
-    // High score for classic neutral pairing OR harmonious contrast
     final neutralA = (max(a.r, max(a.g, a.b)) - min(a.r, min(a.g, a.b))) < 40;
     final neutralB = (max(r2, max(g2, b2)) - min(r2, min(g2, b2))) < 40;
     if (neutralA || neutralB) return 0.92;
 
     final dist = sqrt(pow(a.r - r2, 2) + pow(a.g - g2, 2) + pow(a.b - b2, 2));
-    if (dist < 75) return 0.85; // Monochromatic / tonal harmony
-    if (dist > 170) return 0.88; // Complementary contrast
+    if (dist < 75) return 0.85;
+    if (dist > 170) return 0.88;
     return 0.72;
   }
 }
@@ -237,9 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         }
       }
-    } catch (_) {
-      // Offline-first: ignore silently when offline
-    }
+    } catch (_) {}
   }
 
   Future<void> _downloadAndInstallUpdate() async {
